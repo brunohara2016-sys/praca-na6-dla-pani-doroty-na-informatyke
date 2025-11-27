@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Do Świąt Bożego Narodzenia</title>
+
+<style>
+    body {
+        margin: 0;
+        height: 100vh;
+        background: linear-gradient(180deg, #8b0000, #330000);
+        font-family: 'Arial', sans-serif;
+        color: #fff;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        overflow: hidden;
+    }
+    h1 {
+        font-size: 2.7em;
+        text-shadow: 0 0 15px #ff3b3b;
+        margin-bottom: 20px;
+    }
+    .countdown {
+        display: flex;
+        gap: 15px;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    .unit {
+        background: rgba(255,255,255,0.08);
+        border: 2px solid #ff0000;
+        border-radius: 15px;
+        padding: 15px 25px;
+        text-align: center;
+        box-shadow: 0 0 12px #ff0000;
+    }
+    .number {
+        font-size: 2.8em;
+        font-weight: bold;
+        text-shadow: 0 0 10px #ff0000;
+    }
+    .label {
+        margin-top: 5px;
+        font-size: 1.1em;
+        color: #ffeeee;
+        letter-spacing: 1px;
+    }
+    .snowflake {
+        position: fixed;
+        top: -10px;
+        color: white;
+        font-size: 1.2em;
+        animation: fall linear infinite;
+        pointer-events: none;
+    }
+    @keyframes fall {
+        from { transform: translateY(-10px); }
+        to { transform: translateY(110vh); }
+    }
+</style>
+</head>
+
+<body>
+
+<h1>Do Świąt Bożego Narodzenia 🎄</h1>
+
+<div class="countdown">
+    <div class="unit"><div class="number" id="weeks">0</div><div class="label">Tyg</div></div>
+    <div class="unit"><div class="number" id="days">0</div><div class="label">Dni</div></div>
+    <div class="unit"><div class="number" id="hours">0</div><div class="label">Godz</div></div>
+    <div class="unit"><div class="number" id="minutes">0</div><div class="label">Min</div></div>
+    <div class="unit"><div class="number" id="seconds">0</div><div class="label">Sek</div></div>
+</div>
+
+<script>
+function updateCountdown() {
+    const target = new Date("2025-12-24T00:00:00");
+    const now = new Date();
+    const diff = target - now;
+
+    const sec = Math.floor(diff / 1000) % 60;
+    const min = Math.floor(diff / 60000) % 60;
+    const hr  = Math.floor(diff / 3600000) % 24;
+    const daysTotal = Math.floor(diff / 86400000);
+    const weeks = Math.floor(daysTotal / 7);
+    const days = daysTotal % 7;
+
+    document.getElementById("weeks").textContent = weeks;
+    document.getElementById("days").textContent = days;
+    document.getElementById("hours").textContent = hr;
+    document.getElementById("minutes").textContent = min;
+    document.getElementById("seconds").textContent = sec;
+}
+setInterval(updateCountdown, 1000);
+updateCountdown();
+
+for (let i = 0; i < 40; i++) {
+    let snow = document.createElement("div");
+    snow.className = "snowflake";
+    snow.textContent = "❄";
+    snow.style.left = Math.random() * 100 + "vw";
+    snow.style.animati
